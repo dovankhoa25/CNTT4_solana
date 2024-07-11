@@ -12,6 +12,15 @@ export default function Card({connector, hooks, name}: {connector: Connector, ho
 
   const [error, setError] = useState<Error | undefined>(undefined)
   const [connectionStatus, setConnectionStatus] = useState('Disconnected')
+  const [storedAccount, setStoredAccount] = useState<string | null>(null)
+
+  useEffect(() => {
+    const savedAccount = localStorage.getItem('walletAddress')
+    if (savedAccount) {
+      setStoredAccount(savedAccount)
+    }
+  }, [])
+
   const handleToggleConnect = () => {
     setError(undefined) // clear error state
 
@@ -31,9 +40,15 @@ export default function Card({connector, hooks, name}: {connector: Connector, ho
         }) 
       }
   }
+
+
+ 
   useEffect(() => {
     if(isActive) {
       setConnectionStatus('Connected')
+      if (account) {
+        localStorage.setItem('walletAddress', account)
+      }
     } else {
       setConnectionStatus('Disconnected')
     }
@@ -51,6 +66,7 @@ export default function Card({connector, hooks, name}: {connector: Connector, ho
       <button onClick={handleToggleConnect} disabled={false}>
         {isActive ? "Disconnect" : "Connect Wallet"}
       </button>
+     
     </div>
   )
 }
