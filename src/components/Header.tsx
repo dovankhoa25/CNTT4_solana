@@ -41,6 +41,7 @@ const Header = () => {
                 <div className="text-right">
                     <button className=" border border-solid  border-gray-400 text-gray-300 p-1 bg-[#1c243e] rounded-md hover:opacity-70">
                         <Card connector={connector} hooks={hooks} name='phantom' />
+                        <h3></h3>
                         </button>
                 </div>
             </div>
