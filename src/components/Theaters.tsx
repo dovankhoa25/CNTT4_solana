@@ -1,5 +1,5 @@
 import React from 'react'
-import { MusicImage } from './icon'
+import { MusicImage } from './icon/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowCircleRight, faCakeCandles } from '@fortawesome/free-solid-svg-icons'
 
@@ -14,7 +14,7 @@ const Theaters = () => {
                         <FontAwesomeIcon icon={faArrowCircleRight} className='ml-1'/>
                         </h3>
                 </div>
-                <div className="grid grid-cols-4 gap-10">
+                <div className="grid grid-cols-4 gap-6">
                     <div className="">
                         <img src={MusicImage} alt="" className="w-full rounded-xl" />
                         <h3 className="font-bold text-sm mt-2 text-white">LULULOLA SHOW HOÀNG DŨNG KM LÂM PHÚC & MR BOTT BAND | ĐÔI LỜI TÌNH CA</h3>

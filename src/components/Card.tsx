@@ -48,6 +48,9 @@ export default function Card({connector, hooks, name}: {connector: Connector, ho
     }
     if(isActive) {
       setConnectionStatus('Connected')
+      if (account) {
+        localStorage.setItem('walletAddress', account)
+      }
     } else {
       setConnectionStatus('Disconnected')
     }

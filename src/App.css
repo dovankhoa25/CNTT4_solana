@@ -40,3 +40,74 @@
 .read-the-docs {
   color: #888;
 } */
+.buy-now {
+  background-color: #fff;
+  color: #333;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+}
+.buy-now:hover{
+  background-color: green;
+  color: #fff;
+}
+.ticketing-interface {
+  background-color: #333;
+  color: #fff;
+  padding: 20px;
+}
+
+.pricing-section {
+  display: flex;
+  justify-content: space-between;
+}
+
+.pricing-option {
+  text-align: center;
+}
+
+.pricing-option h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.price {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.buy-now {
+  background-color: #fff;
+  color: #333;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+}
+
+.time-slots {
+  margin-top: 20px;
+}
+
+.time-slot-select {
+  font-size: 16px;
+  padding: 5px;
+}
+.introduction {
+  max-height:100%;
+  overflow: hidden;
+  transition: height 0.5s ease;
+}
+
+.introduction.collapsed {
+  height: 200px;
+}
+
+.toggle-button {
+  margin-top: 10px;
+  background-color: #333;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  cursor: pointer;
+}
