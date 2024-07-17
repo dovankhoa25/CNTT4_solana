@@ -1,11 +1,9 @@
-import { faHourglass } from '@fortawesome/free-regular-svg-icons'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { useWeb3React } from '@web3-react/core';
-import { Link, NavLink } from 'react-router-dom'
-import Card from './Card';
+import { faHourglass } from '@fortawesome/free-regular-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link, NavLink } from 'react-router-dom';
+import { Wallet } from '../connect/wallet';
 
 const Header = () => {
-  const { connector, hooks } = useWeb3React();
   return (
     <div>
       <div className="header">
@@ -39,10 +37,7 @@ const Header = () => {
                     </ul>
                 </div>
                 <div  className="text-right">
-                    <button className=" border border-solid  border-gray-400 text-gray-300 p-1 bg-[#1c243e] rounded-md hover:opacity-70">
-                        <Card connector={connector} hooks={hooks} name='phantom' />
-                        <h3></h3>
-                        </button>
+                        <Wallet />
                 </div>
             </div>
         </div>

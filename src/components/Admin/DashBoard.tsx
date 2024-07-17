@@ -1,12 +1,9 @@
-import { useWeb3React } from "@web3-react/core";
-import { Link, Outlet } from "react-router-dom";
-import connectors from "../../connect/connectors";
-import Card from "../Card";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHouse, faImage, faSliders } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link, Outlet } from "react-router-dom";
+import { Wallet } from "../../connect/wallet";
 
 const DashBoard = () => {
-  const { connector, hooks } = useWeb3React();
     return (
       <div>
         <div className="profile-page-wrapper w-full">
@@ -16,10 +13,9 @@ const DashBoard = () => {
                     <h1 className="text-black text-3xl">
                         <Link to='/'>TICKETBOX</Link>
                     </h1>
-                    <button className=" border border-solid  border-gray-400 text-gray-300 p-1 bg-[#1c243e] rounded-md hover:opacity-70">
-                        <Card connector={connector} hooks={hooks} name='phantom' />
-                        <h3></h3>
-                        </button>
+                    <div  className="text-right">
+                        <Wallet />
+                </div>
                 </div>
               <div className="w-full bg-white px-10 py-24">
                 <div className="title-area w-full flex justify-between items-center fixed">
