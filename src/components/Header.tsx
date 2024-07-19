@@ -2,8 +2,29 @@ import { faHourglass } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link, NavLink } from 'react-router-dom';
 import { Wallet } from '../connect/wallet';
+import { useForm } from 'react-hook-form';
+import { useMutation } from '@tanstack/react-query';
+import axios from 'axios';
 
 const Header = () => {
+    const {
+        register,
+        handleSubmit,
+        formState: { errors }
+    } = useForm()
+
+    const mutation = useMutation({
+        mutationFn: async(wallet) => {
+            const res = await axios.post('http://localhost:3000/getWallet', wallet)
+            return res.data
+        },
+        onSuccess: () => {
+            alert('Thành công!')
+        }
+    })    
+    const onSubmit = (wallet: any) => {
+        mutation.mutate(wallet)
+    }
   return (
     <div>
       <div className="header">
@@ -37,7 +58,10 @@ const Header = () => {
                     </ul>
                 </div>
                 <div  className="text-right">
-                        <Wallet />
+                        <form onSubmit={handleSubmit(onSubmit)}>
+                            <input type="hidden" {...register('address', { required: true })} />
+                            <button><Wallet /></button>
+                        </form>
                 </div>
             </div>
         </div>

@@ -7,13 +7,17 @@ import { Connector } from '@web3-react/types'
 
 import allConnections from './connect/connectors.ts'
 import { BrowserRouter } from 'react-router-dom'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 const connections: [Connector, Web3ReactHooks][] = allConnections.map(([connector, hooks]) => [connector, hooks])
+const queryClient = new QueryClient()
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <Web3ReactProvider connectors={connections}>
+  <QueryClientProvider client={queryClient}>
   <React.StrictMode>
    <BrowserRouter>
     <App />
    </BrowserRouter>
   </React.StrictMode>,
+  </QueryClientProvider>
   </Web3ReactProvider>
 )
