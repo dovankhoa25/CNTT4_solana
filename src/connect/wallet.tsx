@@ -1,35 +1,57 @@
-import React, { FC, useMemo } from 'react';
-import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react';
+import React, { FC, useEffect, useMemo } from 'react';
+import { ConnectionProvider, useWallet, WalletProvider } from '@solana/wallet-adapter-react';
 import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
 import { UnsafeBurnerWalletAdapter } from '@solana/wallet-adapter-wallets';
 import {
-    WalletModalProvider,
     WalletDisconnectButton,
+    WalletModalProvider,
     WalletMultiButton
 } from '@solana/wallet-adapter-react-ui';
 import { clusterApiUrl } from '@solana/web3.js';
-import '@solana/wallet-adapter-react-ui/styles.css'; // Importing the styles
+import '@solana/wallet-adapter-react-ui/styles.css';
+
+
+const WalletComponent: FC = () => {
+    const { publicKey } = useWallet();
+
+    useEffect(() => {
+        if (publicKey) {
+            const walletAddress = publicKey.toString();
+            console.log('Wallet address:', walletAddress);
+            localStorage.setItem('walletAddress', walletAddress);
+        }
+    }, [publicKey]);
+
+    return (
+        <>
+            <WalletMultiButton />
+            {/* <WalletDisconnectButton /> */}
+            {/* Your app's components go here, nested within the context providers. */}
+        </>
+    );
+};
+
 
 export const Wallet: FC = () => {
-    // The network can be set to 'devnet', 'testnet', or 'mainnet-beta'.
+    // Mạng có thể được đặt là 'devnet', 'testnet', hoặc 'mainnet-beta'.
     const network = WalletAdapterNetwork.Devnet;
 
-    // You can also provide a custom RPC endpoint.
+    // Có thể cung cấp một endpoint RPC tùy chỉnh.
     const endpoint = useMemo(() => clusterApiUrl(network), [network]);
 
     const wallets = useMemo(
         () => [
             /**
-             * Wallets that implement either of these standards will be available automatically.
+             * Ví thực hiện một trong các tiêu chuẩn này sẽ có sẵn tự động.
              *
-             *   - Solana Mobile Stack Mobile Wallet Adapter Protocol
+             *   - Giao thức Bộ điều hợp Ví Di động Solana
              *     (https://github.com/solana-mobile/mobile-wallet-adapter)
-             *   - Solana Wallet Standard
+             *   - Tiêu chuẩn Ví Solana
              *     (https://github.com/anza-xyz/wallet-standard)
              *
-             * If you wish to support a wallet that supports neither of those standards,
-             * instantiate its legacy wallet adapter here. Common legacy adapters can be found
-             * in the npm package `@solana/wallet-adapter-wallets`.
+             * Nếu bạn muốn hỗ trợ một ví không hỗ trợ cả hai tiêu chuẩn trên,
+             * hãy khởi tạo bộ điều hợp ví cũ của nó ở đây. Các bộ điều hợp phổ biến có thể được tìm thấy
+             * trong gói npm `@solana/wallet-adapter-wallets`.
              */
             new UnsafeBurnerWalletAdapter(),
         ],
@@ -41,11 +63,13 @@ export const Wallet: FC = () => {
         <ConnectionProvider endpoint={endpoint}>
             <WalletProvider wallets={wallets} autoConnect>
                 <WalletModalProvider>
-                    <WalletMultiButton />
+                    <WalletComponent />
+                    {/* <WalletMultiButton /> */}
                     {/* <WalletDisconnectButton /> */}
-                    { /* Your app's components go here, nested within the context providers. */ }
                 </WalletModalProvider>
             </WalletProvider>
         </ConnectionProvider>
     );
 };
+
+export default Wallet;
