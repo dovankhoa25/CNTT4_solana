@@ -9,7 +9,7 @@ import {
 } from '@solana/wallet-adapter-react-ui';
 import { clusterApiUrl } from '@solana/web3.js';
 import '@solana/wallet-adapter-react-ui/styles.css';
-
+import axios from 'axios';
 
 const WalletComponent: FC = () => {
     const { publicKey } = useWallet();
@@ -19,6 +19,15 @@ const WalletComponent: FC = () => {
             const walletAddress = publicKey.toString();
             console.log('Wallet address:', walletAddress);
             localStorage.setItem('walletAddress', walletAddress);
+            axios.post('http://localhost:3000/postWallet', { walletAddress })
+                .then(response => {
+                    console.log('Post request successful:', response.data);
+                    // Xử lý kết quả response nếu cần thiết
+                })
+                .catch(error => {
+                    console.error('Error in POST request:', error);
+                    // Xử lý lỗi nếu cần thiết
+                });
         }
     }, [publicKey]);
 
