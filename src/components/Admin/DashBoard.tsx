@@ -65,6 +65,44 @@ const DashBoard = () => {
                         </Link>
                       </div>
 
+                      <div className="item group">
+                        <Link to="category">
+                          <div className="flex space-x-3 items-center text-qgray hover:text-red-500">
+                            <span>
+                            <FontAwesomeIcon icon={faImage} />
+                            </span>
+                            <span className=" font-normal text-base">
+                              Category
+                            </span>
+                          </div>
+                        </Link>
+                      </div>
+
+                      <div className="item group">
+                        <Link to="ticket">
+                          <div className="flex space-x-3 items-center text-qgray hover:text-red-500">
+                            <span>
+                            <FontAwesomeIcon icon={faImage} />
+                            </span>
+                            <span className=" font-normal text-base">
+                              Ticket
+                            </span>
+                          </div>
+                        </Link>
+                      </div>
+
+                      <div className="item group">
+                        <Link to="events">
+                          <div className="flex space-x-3 items-center text-qgray hover:text-red-500">
+                            <span>
+                            <FontAwesomeIcon icon={faImage} />
+                            </span>
+                            <span className=" font-normal text-base">
+                              Events
+                            </span>
+                          </div>
+                        </Link>
+                      </div>
                     </div>
                   </div>
                   <div className="flex-1">
