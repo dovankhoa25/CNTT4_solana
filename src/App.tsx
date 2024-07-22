@@ -13,6 +13,8 @@ import CategoryAdd from './components/Admin/Category/CategoryAdd';
 import TicketAdd from './components/Admin/Tickets/TicketAdd';
 import CategorytList from './components/Admin/Category/CategoryList';
 import TicketList from './components/Admin/Tickets/TicketList';
+import TicketListByCategory from './components/TicketByCategory';
+
 function App() {
   return (
     <>
@@ -21,6 +23,7 @@ function App() {
         <Route index element={<Home/>} />
         <Route path='music' element={<Music />} />
         <Route path='detail' element={<Detail/>} />
+        <Route path='/tickets/:category' element={< TicketListByCategory />} />
       </Route>
 
       <Route path='/admin' element={<LayoutAdmin />}>

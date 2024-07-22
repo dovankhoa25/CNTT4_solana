@@ -3,6 +3,7 @@ import Music from '../components/Music'
 import Sport from '../components/Sport'
 import Theaters from '../components/Theaters'
 
+
 const Home = () => {
   return (
     <div className='w-full'>
