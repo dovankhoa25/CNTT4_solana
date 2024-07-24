@@ -5,6 +5,8 @@ import { Wallet } from '../connect/wallet';
 import { useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
+import { useQuery } from '@tanstack/react-query';
+import TicketListByCategory from './TicketByCategory';
 
 const Header = () => {
     const {
@@ -12,6 +14,13 @@ const Header = () => {
         handleSubmit,
         formState: { errors }
     } = useForm()
+    const { data } = useQuery({
+        queryKey: ['CATEGORY'],
+        queryFn: async () => {
+            const res = await axios.get('http://127.0.0.1:8000/api/categories')
+            return res.data
+        }
+    })
 
     const mutation = useMutation({
         mutationFn: async(wallet) => {
@@ -25,7 +34,6 @@ const Header = () => {
     const onSubmit = (wallet: any) => {
         mutation.mutate(wallet)
     }
-
 
 
   return (
@@ -54,10 +62,13 @@ const Header = () => {
             <div className="bg-black grid grid-cols-2 py-4 px-24">
                 <div>
                     <ul>
-                        <li className="text-white px-4 inline-block hover:text-[#2DC275]"><NavLink to="music">Music</NavLink></li>
-                        <li className="text-white px-4 inline-block hover:text-[#2DC275]"><NavLink to="theaters">Theaters & Art</NavLink></li>
+                          {data?.map((category: any, index: number) => (
+                              <li className="text-white px-4 inline-block hover:text-[#2DC275]" key={category._id}><NavLink to="``/tickets/${category.name}``">{category.name}</NavLink></li>
+                          ))}
+                        
+                        {/* <li className="text-white px-4 inline-block hover:text-[#2DC275]"><NavLink to="theaters">Theaters & Art</NavLink></li>
                         <li className="text-white px-4 inline-block hover:text-[#2DC275]"><NavLink to="sport">Sport</NavLink></li>
-                        <li className="text-white px-4 inline-block hover:text-[#2DC275]"><NavLink to="other">Others</NavLink></li>
+                        <li className="text-white px-4 inline-block hover:text-[#2DC275]"><NavLink to="other">Others</NavLink></li> */}
                     </ul>
                 </div>
                 <div  className="text-right">

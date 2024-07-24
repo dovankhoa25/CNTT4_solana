@@ -18,7 +18,6 @@ const TicketListByCategory = (category: any) => {
         }
     })
     return (
-
         <div>
             <div className="my-6">
                 <div className="flex justify-between mb-2">
@@ -32,15 +31,37 @@ const TicketListByCategory = (category: any) => {
                     </h3>
                 </div>
                 <div className="grid grid-cols-4 gap-6">
-                    {tickets?.map((ticket: any) => (
+                    {tickets?.map((ticket: any,index:any) => (
                         <div className="" key={ticket._id}>
-                            <Link to="/detail/${ticket._id}"><img src={MusicImage} alt="" className="w-full rounded-xl" /></Link>
+                            {/* <Link to="/detail/${ticket._id}"><img src={MusicImage} alt="" className="w-full rounded-xl" /></Link>
                             <h3 className="font-bold text-sm mt-2 text-white">{ticket.name}</h3>
                             <p className="text-[#2DC275] my-2 font-bold">{ticket.price}</p>
                             <span className="text-white">
                                 <FontAwesomeIcon icon={faCakeCandles} className='mr-1' />
                                 19 Jul, 2024
-                            </span>
+                            </span> */}
+                            <th className="px-6 py-4">{index + 1}</th>
+                            <th className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                <p className="inline-block">{ticket.name}</p>
+                            </th>
+                            <th className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                <p className="inline-block">{ticket.ngayphathanh}</p>
+                            </th>
+                            <th className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                <p className="inline-block">{ticket.ngayketthuc}</p>
+                            </th>
+                            <th className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                <p className="inline-block">{ticket.diachi}</p>
+                            </th>
+                            <th className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                <p className="inline-block">{ticket.giatien}</p>
+                            </th>
+                            <th className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                <p className="inline-block">{ticket.nguoitochuc}</p>
+                            </th>
+                            <th className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                                <p className="inline-block">{ticket.noitochuc}</p>
+                            </th>
                         </div>
 
                     ))}

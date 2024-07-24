@@ -19,7 +19,7 @@ const WalletComponent: FC = () => {
             const walletAddress = publicKey.toString();
             console.log('Wallet address:', walletAddress);
             localStorage.setItem('walletAddress', walletAddress);
-            axios.post('http://127.0.0.1:8000/api/postWallet', { walletAddress })
+            axios.post('http://127.0.0.1:8000/api/wallets', { walletAddress })
                 .then(response => {
                     console.log('Post request successful:', response.data);
                     // Xử lý kết quả response nếu cần thiết
