@@ -62,8 +62,8 @@ const Header = () => {
             <div className="bg-black grid grid-cols-2 py-4 px-24">
                 <div>
                     <ul>
-                          {data?.map((category: any, index: number) => (
-                              <li className="text-white px-4 inline-block hover:text-[#2DC275]" key={category._id}><NavLink to="``/tickets/${category.name}``">{category.name}</NavLink></li>
+                          {data?.map((category: any,) => (
+                              <li className="text-white px-4 inline-block hover:text-[#2DC275]" key={category.cateID}><NavLink to="/tickets/${category.cateID}">{category.name}</NavLink></li>
                           ))}
                         
                         {/* <li className="text-white px-4 inline-block hover:text-[#2DC275]"><NavLink to="theaters">Theaters & Art</NavLink></li>

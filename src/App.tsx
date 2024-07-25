@@ -23,7 +23,7 @@ function App() {
         <Route index element={<Home/>} />
         <Route path='music' element={<Music />} />
         <Route path='detail' element={<Detail/>} />
-        <Route path='/tickets/:category' element={< TicketListByCategory />} />
+        <Route path='/tickets/:cateID' element={< TicketListByCategory/>} />
       </Route>
 
       <Route path='/admin' element={<LayoutAdmin />}>

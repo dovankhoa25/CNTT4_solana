@@ -17,8 +17,8 @@ const Home = () => {
   return (
     <div className='w-full'>
         <Banner />
-      {data?.map((category: any, index: number) => (
-        <TicketListByCategory key={category._id} category={category.name} />
+      {data?.map((category: any,) => (
+        <TicketListByCategory key={category.cateID} category={category.name} />
       ))}
         
         {/* <Theaters/>
