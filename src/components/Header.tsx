@@ -7,13 +7,9 @@ import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { useQuery } from '@tanstack/react-query';
 import TicketListByCategory from './TicketByCategory';
-
+import { ConnectionProvider, useWallet, WalletProvider } from '@solana/wallet-adapter-react';
+import { useEffect } from 'react';
 const Header = () => {
-    const {
-        register,
-        handleSubmit,
-        formState: { errors }
-    } = useForm()
     const { data } = useQuery({
         queryKey: ['CATEGORY'],
         queryFn: async () => {
@@ -21,22 +17,8 @@ const Header = () => {
             return res.data
         }
     })
-
-    const mutation = useMutation({
-        mutationFn: async(wallet) => {
-            const res = await axios.post('http://localhost:3000/getWallet', wallet)
-            return res.data
-        },
-        onSuccess: () => {
-            alert('Thành công!')
-        }
-    })    
-    const onSubmit = (wallet: any) => {
-        mutation.mutate(wallet)
-    }
-
-
-  return (
+    
+ return (
     <div>
       <div className="header">
             <div className="bg-[#2DC275] grid grid-cols-3 py-8 px-24">
@@ -62,7 +44,7 @@ const Header = () => {
             <div className="bg-black grid grid-cols-2 py-4 px-24">
                 <div>
                     <ul>
-                          {data?.map((category: any,) => (
+                          {data?.map((category: any) => (
                               <li className="text-white px-4 inline-block hover:text-[#2DC275]" key={category.cateID}><NavLink to="/tickets/${category.cateID}">{category.name}</NavLink></li>
                           ))}
                         
@@ -72,10 +54,12 @@ const Header = () => {
                     </ul>
                 </div>
                 <div  className="text-right">
-                        <form onSubmit={handleSubmit(onSubmit)}>
-                            <input type="hidden" {...register('address', { required: true })} />
-                            <button><Wallet /></button>
-                        </form>
+                        {/* <form className='' onSubmit={handleSubmit(onSubmit)} >
+                            <input type="hidden" {...register('wallet', { required: true })} value={walletAddress} />
+                            <button type='submit'></button>
+                          
+                        </form> */}
+                    <Wallet />
                 </div>
             </div>
         </div>

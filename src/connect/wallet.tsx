@@ -13,28 +13,46 @@ import axios from 'axios';
 
 const WalletComponent: FC = () => {
     const { publicKey } = useWallet();
+    // let wallet
+    // if(publicKey){
+    //     let wallet =publicKey.toString()
+    // }
+    // console.log(wallet);
+    
+    // const mutation = useMutation({
+    //     mutationFn: async (wallet) => {
+    //         const res = await axios.post('http://127.0.0.1:8000/api/wallet', wallet)
+    //         return res.data
+    //     },
+    //     onSuccess: () => {
+    //         alert('Thành công!')
+    //     }
+    // })
+    
+
 
     useEffect(() => {
         if (publicKey) {
-            const wallet = publicKey.toString();
-            console.log('Wallet address:', wallet);
-            localStorage.setItem('walletAddress', wallet);
-            axios.post('http://127.0.0.1:8000/api/wallet', { wallet })
+           const walletData ={
+                wallet:publicKey.toString(),
+            }
+            console.log('Wallet address:', walletData);
+            // localStorage.setItem('walletAddress', walletAddress);
+            axios.post('http://127.0.0.1:8000/api/wallet', walletData )
                 .then(response => {
                     console.log('Post request successful:', response.data);
                     // Xử lý kết quả response nếu cần thiết
                 })
                 .catch(error => {
                     console.error('Error in POST request:', error);
-                    console.log(error);
-                    
+                    console.log(error)
                     // Xử lý lỗi nếu cần thiết
                 });
         }
     }, [publicKey]);
 
     return (
-        <>
+        <>  
             <WalletMultiButton />
             {/* <WalletDisconnectButton /> */}
             {/* Your app's components go here, nested within the context providers. */}
