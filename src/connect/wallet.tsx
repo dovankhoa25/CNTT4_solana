@@ -16,16 +16,18 @@ const WalletComponent: FC = () => {
 
     useEffect(() => {
         if (publicKey) {
-            const walletAddress = publicKey.toString();
-            console.log('Wallet address:', walletAddress);
-            localStorage.setItem('walletAddress', walletAddress);
-            axios.post('http://127.0.0.1:8000/api/wallets', { walletAddress })
+            const wallet = publicKey.toString();
+            console.log('Wallet address:', wallet);
+            localStorage.setItem('walletAddress', wallet);
+            axios.post('http://127.0.0.1:8000/api/wallet', { wallet })
                 .then(response => {
                     console.log('Post request successful:', response.data);
                     // Xử lý kết quả response nếu cần thiết
                 })
                 .catch(error => {
                     console.error('Error in POST request:', error);
+                    console.log(error);
+                    
                     // Xử lý lỗi nếu cần thiết
                 });
         }
