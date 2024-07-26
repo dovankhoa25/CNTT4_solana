@@ -1,7 +1,4 @@
 import Banner from '../components/Banner'
-import Music from '../components/Music'
-import Sport from '../components/Sport'
-import Theaters from '../components/Theaters'
 import axios from 'axios'
 import { useQuery } from '@tanstack/react-query'
 import TicketListByCategory from '../components/TicketByCategory'
@@ -17,8 +14,8 @@ const Home = () => {
   return (
     <div className='w-full'>
         <Banner />
-      {data?.map((category: any,) => (
-        <TicketListByCategory key={category.cateID} category={category.name} />
+      {data?.map((category: any) => (
+        <TicketListByCategory key={category.cateID} category={category.cateID} />
       ))}
         
         {/* <Theaters/>
