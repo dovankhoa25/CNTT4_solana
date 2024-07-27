@@ -14,16 +14,14 @@ import TicketAdd from './components/Admin/Tickets/TicketAdd';
 import CategorytList from './components/Admin/Category/CategoryList';
 import TicketList from './components/Admin/Tickets/TicketList';
 import TicketListByCategory from './components/TicketByCategory';
-
+import TicketByCateTier2 from './components/TicketByCateTier2';
 function App() {
   return (
     <>
     <Routes>
       <Route path='/' element={<LayoutWebsite />}>
         <Route index element={<Home/>} />
-        <Route path='music' element={<Music />} />
-        <Route path='detail' element={<Detail/>} />
-        <Route path='/tickets/:cateID' element={< TicketListByCategory/>} />
+        <Route path='/tickets/:cateID' element={< TicketByCateTier2 />}  />
       </Route>
 
       <Route path='/admin' element={<LayoutAdmin />}>

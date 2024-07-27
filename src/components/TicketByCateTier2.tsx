@@ -5,22 +5,15 @@ import { faCakeCandles } from '@fortawesome/free-solid-svg-icons'
 import { faArrowCircleRight } from '@fortawesome/free-solid-svg-icons/faArrowCircleRight'
 import { Link, useNavigate } from 'react-router-dom'
 import { useQuery } from '@tanstack/react-query'
-import { useState,useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 const props = {}
-    
 
-const TicketListByCategory = ({cateID}:any ) => {
-    // console.log(cateid);
-    // const { data: tickets } = useQuery({
-    //     queryKey: ['TICKET'],
-    //     queryFn: async () => {
-    //         const res = await axios.get(`http://127.0.0.1:8000/api/tickets-by-category/${cateid}`)
-    //         return res.data
-    //     }
-    // })
-    // const { cateID } = useParams();
+
+const TicketByCateTier2 = () => {
+   
+    const { cateID } = useParams();
     const [tickets, setTickets] = useState([]);
     useEffect(() => {
         const fetchTickets = async () => {
@@ -34,12 +27,12 @@ const TicketListByCategory = ({cateID}:any ) => {
         fetchTickets();
     }, [cateID]);
     return (
-      
+
         <div>
             <div className="my-6">
                 <div className="flex justify-between mb-2">
                     <h2 className="font-bold text-xl text-white">
-                       {cateID}
+                        {cateID}
                     </h2>
                     <h3 className="text-lg text-gray-400">
                         View more
@@ -57,10 +50,10 @@ const TicketListByCategory = ({cateID}:any ) => {
                                 <FontAwesomeIcon icon={faCakeCandles} className='mr-1' />
                                 {ticket.mota}
                             </span>
-                            
+
                         </div>
-                       
-                    ))}   
+
+                    ))}
                 </div>
             </div>
         </div>
@@ -68,4 +61,4 @@ const TicketListByCategory = ({cateID}:any ) => {
 }
 
 
-export default TicketListByCategory
+export default TicketByCateTier2

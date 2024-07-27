@@ -9,6 +9,8 @@ import { useQuery } from '@tanstack/react-query';
 import TicketListByCategory from './TicketByCategory';
 import { ConnectionProvider, useWallet, WalletProvider } from '@solana/wallet-adapter-react';
 import { useEffect } from 'react';
+
+
 const Header = () => {
     const { data } = useQuery({
         queryKey: ['CATEGORY'],
@@ -45,12 +47,8 @@ const Header = () => {
                 <div>
                     <ul>
                           {data?.map((category: any) => (
-                              <li className="text-white px-4 inline-block hover:text-[#2DC275]" key={category.cateID}><NavLink to="/tickets/${category.cateID}">{category.name}</NavLink></li>
+                              <li className="text-white px-4 inline-block hover:text-[#2DC275]" key={category.id}><NavLink to={`/tickets/${category.id}`}>{category.name}</NavLink></li>
                           ))}
-                        
-                        {/* <li className="text-white px-4 inline-block hover:text-[#2DC275]"><NavLink to="theaters">Theaters & Art</NavLink></li>
-                        <li className="text-white px-4 inline-block hover:text-[#2DC275]"><NavLink to="sport">Sport</NavLink></li>
-                        <li className="text-white px-4 inline-block hover:text-[#2DC275]"><NavLink to="other">Others</NavLink></li> */}
                     </ul>
                 </div>
                 <div  className="text-right">

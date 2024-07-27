@@ -36,7 +36,7 @@ const WalletComponent: FC = () => {
            const walletData ={
                 wallet:publicKey.toString(),
             }
-            console.log('Wallet address:', walletData);
+            // console.log('Wallet address:', walletData);
             // localStorage.setItem('walletAddress', walletAddress);
             axios.post('http://127.0.0.1:8000/api/wallet', walletData )
                 .then(response => {
