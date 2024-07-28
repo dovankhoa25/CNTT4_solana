@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { BannerImage } from './icon/image'
 const Banner = () => {
   return (

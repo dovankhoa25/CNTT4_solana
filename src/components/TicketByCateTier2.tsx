@@ -32,7 +32,7 @@ const TicketByCateTier2 = () => {
             <div className="my-6">
                 <div className="flex justify-between mb-2">
                     <h2 className="font-bold text-xl text-white">
-                        {cateID}
+                        
                     </h2>
                     <h3 className="text-lg text-gray-400">
                         View more

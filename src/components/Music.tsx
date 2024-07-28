@@ -3,11 +3,8 @@ import { MusicImage } from './icon/image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCakeCandles } from '@fortawesome/free-solid-svg-icons'
 import { faArrowCircleRight } from '@fortawesome/free-solid-svg-icons/faArrowCircleRight'
-import { Link,useNavigate } from 'react-router-dom'
-import { useQuery } from '@tanstack/react-query'
-import axios from 'axios'
+import { Link } from 'react-router-dom'
 
-import { useEffect,useState } from 'react'
 
 const Music = ()=> {
     

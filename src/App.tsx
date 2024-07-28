@@ -22,6 +22,7 @@ function App() {
       <Route path='/' element={<LayoutWebsite />}>
         <Route index element={<Home/>} />
         <Route path='/tickets/:cateID' element={< TicketByCateTier2 />}  />
+        <Route path='/detail/:id'element={<Detail/>} /> 
       </Route>
 
       <Route path='/admin' element={<LayoutAdmin />}>

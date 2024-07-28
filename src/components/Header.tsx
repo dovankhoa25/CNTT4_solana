@@ -52,11 +52,6 @@ const Header = () => {
                     </ul>
                 </div>
                 <div  className="text-right">
-                        {/* <form className='' onSubmit={handleSubmit(onSubmit)} >
-                            <input type="hidden" {...register('wallet', { required: true })} value={walletAddress} />
-                            <button type='submit'></button>
-                          
-                        </form> */}
                     <Wallet />
                 </div>
             </div>
