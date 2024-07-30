@@ -15,11 +15,18 @@ const Detail = () => {
     //GET theo ID
     const { id } = useParams();
     const [tickets, setTickets] = useState([]);
+    const [categoryName, setCategoryName] = useState('');
     useEffect(() => {
         const fetchTickets = async () => {
             try {
                 const response = await axios.get(`http://127.0.0.1:8000/api/ticket/detail/${id}`);
                 setTickets(response.data.tickets);
+                
+                // Lấy thông tin category dựa vào ID
+                const categoryResponse = await axios.get(`http://127.0.0.1:8000/api/category/detail/${response.data.cateID}`);
+                setCategoryName(categoryResponse.data.categories.name);
+                console.log(categoryResponse);
+                
             } catch (error) {
                 console.error('Error fetching tickets:', error);
             }
@@ -86,7 +93,7 @@ const Detail = () => {
                     <div className="ticketing-interface" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
                         <div>
                             <h3 className="text-left font-bold my-2">Loại vé</h3>
-                            <p className="text-left text-sm">{ticket.cateID}</p>
+                            <p className="text-left text-sm">{categoryName}</p>
                             <h3 className="text-left font-bold my-2">Thời gian bắt đầu</h3>
                             <p className="text-left text-sm">{ticket.ngayphathanh}</p>
                             <h3 className="text-left font-bold my-2">Thời gian kết thúc</h3>

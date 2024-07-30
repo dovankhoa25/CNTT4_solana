@@ -50,7 +50,7 @@ const TicketListByCategory = ({cateID}:any ) => {
                 <div className="grid grid-cols-4 gap-6">
                     {tickets?.map((ticket: any) => (
                         <div className="" key={ticket.id}>
-                            <Link to={`/detail/${ticket.id}`}><img src={ticket.image} alt="" className="w-full rounded-xl" /></Link>
+                            <Link to={`/detail/${ticket.id}`}><img src={ticket.urlimage} alt="" className="w-full rounded-xl" /></Link>
                             <h3 className="font-bold text-sm mt-2 text-white">{ticket.name}</h3>
                             <p className="text-[#2DC275] my-2 font-bold">{ticket.giatien}</p>
                             <span className="text-white">
