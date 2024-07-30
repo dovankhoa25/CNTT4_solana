@@ -12,13 +12,19 @@ const Detail = () => {
     const { publicKey, sendTransaction, connected } = useWallet();
     const [isCollapsed, setIsCollapsed] = useState(false);
     const [tickets, setTickets] = useState([]);
-    const { id } = useParams();
-
+    const { id } = useParams()
+    const [categoryName, setCategoryName] = useState('');
     useEffect(() => {
         const fetchTickets = async () => {
             try {
                 const response = await axios.get(`http://127.0.0.1:8000/api/ticket/detail/${id}`);
                 setTickets(response.data.tickets);
+                
+                // Lấy thông tin category dựa vào ID
+                const categoryResponse = await axios.get(`http://127.0.0.1:8000/api/category/detail/${response.data.cateID}`);
+                setCategoryName(categoryResponse.data.categories.name);
+                console.log(categoryResponse);
+                
             } catch (error) {
                 console.error('Error fetching tickets:', error);
             }
