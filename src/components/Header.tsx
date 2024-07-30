@@ -1,7 +1,6 @@
 import { faHourglass } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link, NavLink } from 'react-router-dom';
-import { Wallet } from '../connect/wallet';
 import { useForm } from 'react-hook-form';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
@@ -9,6 +8,7 @@ import { useQuery } from '@tanstack/react-query';
 import TicketListByCategory from './TicketByCategory';
 import { ConnectionProvider, useWallet, WalletProvider } from '@solana/wallet-adapter-react';
 import { useEffect } from 'react';
+import Wallet from '../connect/wallet';
 
 
 const Header = () => {

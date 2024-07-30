@@ -1,7 +1,7 @@
 import { faHouse, faImage, faSliders } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, Outlet } from "react-router-dom";
-import { Wallet } from "../../connect/wallet";
+import Wallet from "../../connect/wallet";
 
 const DashBoard = () => {
     return (
