@@ -18,6 +18,7 @@ const TicketAdd = () => {
             ngayphathanh: '',
             ngayketthuc:'',
             diachi: '',
+            urlimage: '',
             giatien: '',
             mota: '',
             nguoitochuc: '',
@@ -92,6 +93,17 @@ const TicketAdd = () => {
                             <input
                                 {...register('giatien', { required: 'Giá vé là bắt buộc' })}
                                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline disabled:cursor-not-allowed"
+                            />
+                        </div>
+
+                        <div className="mb-4">
+                            <label className="block text-gray-700 text-sm font-bold mb-2">
+                                Ảnh
+                            </label>
+                            <input
+                                {...register('urlimage', { required: 'Địa chỉ vé là bắt buộc' })}
+                                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline disabled:cursor-not-allowed"
+                               
                             />
                         </div>
 

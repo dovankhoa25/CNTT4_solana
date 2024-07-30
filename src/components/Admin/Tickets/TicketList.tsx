@@ -1,6 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { formatDate, formatPrice } from "../../../utils/format";
 
 const TicketList = () => {
     const { data: tickets } = useQuery({
@@ -10,6 +11,7 @@ const TicketList = () => {
             return res.data
         }
     })
+
   return (
     <>
       <div>Danh sách vé</div>
@@ -31,9 +33,10 @@ const TicketList = () => {
               </td>
               <td scope="col" className="px-6 py-3">Ngày Phát Hành</td>
               <td scope="col" className="px-6 py-3">Ngày Kết Thúc</td>
+              <td scope="col" className="px-6 py-3">Ảnh</td>
               <td scope="col" className="px-6 py-3">Địa Chỉ</td>
               <td scope="col" className="px-6 py-3">Giá</td>
-              <td scope="col" className="px-6 py-3">Người Tổ Chức</td>
+              {/* <td scope="col" className="px-6 py-3">Người Tổ Chức</td> */}
               <td scope="col" className="px-6 py-3">Nơi Tổ Chức</td>
               <td scope="col" className="px-6 py-3">
                 action
@@ -51,20 +54,23 @@ const TicketList = () => {
                   <p className="inline-block">{ticket.name}</p>
                 </th>
                 <th className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                  <p className="inline-block">{ticket.ngayphathanh}</p>
+                  <p className="inline-block">{formatDate(ticket.ngayphathanh)}</p>
                 </th>
                 <th className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                  <p className="inline-block">{ticket.ngayketthuc}</p>
+                  <p className="inline-block">{formatDate(ticket.ngayphathanh)}</p>
+                </th>
+                <th className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                  <img src={ticket.urlimage} className="inline-block" />
                 </th>
                 <th className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                   <p className="inline-block">{ticket.diachi}</p>
                 </th>
                 <th className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                  <p className="inline-block">{ticket.giatien}</p>
+                  <p className="inline-block">{formatPrice(ticket.giatien)} SOL</p>
                 </th>
-                <th className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                {/* <th className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                   <p className="inline-block">{ticket.nguoitochuc}</p>
-                </th>
+                </th> */}
                 <th className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                   <p className="inline-block">{ticket.noitochuc}</p>
                 </th>

@@ -8,6 +8,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useState,useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
+import { formatDate, formatPrice } from '../utils/format'
 const props = {}
     
 
@@ -52,10 +53,10 @@ const TicketListByCategory = ({cateID}:any ) => {
                         <div className="" key={ticket.id}>
                             <Link to={`/detail/${ticket.id}`}><img src={ticket.urlimage} alt="" className="w-full rounded-xl" /></Link>
                             <h3 className="font-bold text-sm mt-2 text-white">{ticket.name}</h3>
-                            <p className="text-[#2DC275] my-2 font-bold">{ticket.giatien}</p>
+                            <p className="text-[#2DC275] my-2 font-bold">{formatPrice(ticket.giatien)} SOL</p>
                             <span className="text-white">
                                 <FontAwesomeIcon icon={faCakeCandles} className='mr-1' />
-                                {ticket.mota}
+                                {formatDate(ticket.ngayphathanh)}
                             </span>
                             
                         </div>

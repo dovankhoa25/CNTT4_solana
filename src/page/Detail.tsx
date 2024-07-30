@@ -7,6 +7,8 @@ import axios from "axios";
 import { useWallet } from "@solana/wallet-adapter-react";
 import { clusterApiUrl, Connection, LAMPORTS_PER_SOL, PublicKey, SystemProgram, Transaction } from "@solana/web3.js";
 import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
+import { toast } from "react-toastify";
+import { formatDate, formatPrice } from "../utils/format";
 
 const Detail = () => {
     const { publicKey, sendTransaction, connected } = useWallet();
@@ -34,10 +36,10 @@ const Detail = () => {
 
     const handleBuyTicket = useCallback(async (ticket: any) => {
         if (!connected || !publicKey) {
-            alert('Please connect your wallet first!');
+            toast.warning('Please connect your wallet first!');
             return;
         }
-
+        // Transfer
         const connection = new Connection(clusterApiUrl(WalletAdapterNetwork.Devnet));
         const toPublicKey = new PublicKey('2KApVahSsRytYNN1ovEoKTNbXodtLgzkxSFLGMgn44uK');
         const transaction = new Transaction().add(
@@ -49,14 +51,35 @@ const Detail = () => {
         );
 
         try {
+            // Transfer SOL
             const signature = await sendTransaction(transaction, connection);
             await connection.confirmTransaction(signature, "processed");
             console.log('Transaction successful with signature:', signature);
 
+            //End transfer
+
+             // Post ticket
+             const postData = {
+                wallet: publicKey.toString(),
+                dataId: ticket.id,
+                soluong: 1
+            };
+
+            console.log('Sending postData:', postData);
+
+            const response = await axios.post('http://127.0.0.1:8000/api/Ticket/add/gameshift', postData);
+            console.log("Add ticket successfully", response.data);
+            toast.success('Ticket purchased successfully!');
+
             
         } catch (error) {
             console.error('Transaction failed:', error);
-            alert('Transaction failed. Please try again.');
+            if (error.response) {
+                console.log('API response error:', error.response.data);
+                toast.error(`Transaction failed: ${error.response.data.message}`);
+            } else {
+                toast.error('Transaction failed. Please try again.');
+            }
         }
     }, [connected, publicKey, sendTransaction]);
 
@@ -70,11 +93,11 @@ const Detail = () => {
                             <h1 className="text-xl text-white font-bold">{ticket.name}</h1>
                             <p className="text-sm text-[#2DC275] font-bold my-2">
                                 <FontAwesomeIcon icon={faCakeCandles} className='mr-1' />
-                                Thời gian bắt đầu :{ticket.ngayphathanh}
+                                Thời gian bắt đầu :{formatDate(ticket.ngayphathanh)}
                             </p>
                             <p className="text-sm text-[#2DC275] font-bold my-2">
                                 <FontAwesomeIcon icon={faCakeCandles} className='mr-1' />
-                                Thời gian kết thúc :{ticket.ngayketthuc}
+                                Thời gian kết thúc :{formatDate(ticket.ngayketthuc)}
                             </p>
                             <p className="text-sm text-[#2DC275] font-bold my-2">
                                 <FontAwesomeIcon icon={faLocationDot} className='mr-1' />
@@ -82,7 +105,7 @@ const Detail = () => {
                             </p>
                         </div>
                         <div className="my-4">
-                            <h3 className="text-white text-lg font-bold">Từ <a href="" className="text-[#2DC275] text-lg font-bold">{ticket.giatien}SOL</a></h3>
+                            <h3 className="text-white text-lg font-bold">Từ <a href="" className="text-[#2DC275] text-lg font-bold">{formatPrice(ticket.giatien)} SOL</a></h3>
                             <button 
                                 className="w-full my-2 bg-[#2DC275] py-1 rounded-sm text-white font-bold hover:bg-white hover:text-black"
                                 onClick={() => handleBuyTicket(ticket)}
