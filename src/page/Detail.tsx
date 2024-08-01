@@ -1,16 +1,19 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { BannerDetail, BannerEvent, BannerFestival } from "../components/icon/image";
 import { faCakeCandles, faLocationDot } from "@fortawesome/free-solid-svg-icons";
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback,FC,useMemo } from 'react';
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import { useWallet } from "@solana/wallet-adapter-react";
-import { clusterApiUrl, Connection, LAMPORTS_PER_SOL, PublicKey, SystemProgram, Transaction } from "@solana/web3.js";
-import { WalletAdapterNetwork } from "@solana/wallet-adapter-base";
 import { toast } from "react-toastify";
 import { formatDate, formatPrice } from "../utils/format";
+import { useWallet, WalletProvider, ConnectionProvider } from "@solana/wallet-adapter-react";
+import { clusterApiUrl, SystemProgram, Transaction, Keypair, Connection, LAMPORTS_PER_SOL, PublicKey } from '@solana/web3.js';
+import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
+import { WalletModalProvider, WalletMultiButton } from '@solana/wallet-adapter-react-ui';
+import { UnsafeBurnerWalletAdapter } from '@solana/wallet-adapter-wallets';
 
-const Detail = () => {
+
+const DetailCompoment:FC = () => {
     const { publicKey, sendTransaction, connected } = useWallet();
     const [isCollapsed, setIsCollapsed] = useState(false);
     const [tickets, setTickets] = useState([]);
@@ -74,9 +77,9 @@ const Detail = () => {
             
         } catch (error) {
             console.error('Transaction failed:', error);
-            if (error.response) {
-                console.log('API response error:', error.response.data);
-                toast.error(`Transaction failed: ${error.response.data.message}`);
+            if (error) {
+                console.log('API response error:', error);
+                
             } else {
                 toast.error('Transaction failed. Please try again.');
             }
@@ -169,5 +172,28 @@ const Detail = () => {
         </div>
     );
 };
+const Detail: FC = () => {
+
+    const network = WalletAdapterNetwork.Devnet;
+    const endpoint = useMemo(() => clusterApiUrl(network), [network]);
+
+    const wallets = useMemo(
+        () => [
+            new UnsafeBurnerWalletAdapter(),
+        ],
+        [network]
+    );
+
+    return (
+        <ConnectionProvider endpoint={endpoint}>
+            <WalletProvider wallets={wallets} autoConnect>
+                <WalletModalProvider>
+                    <DetailCompoment />
+                </WalletModalProvider>
+            </WalletProvider>
+        </ConnectionProvider>
+    );
+
+}
 
 export default Detail;
