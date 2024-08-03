@@ -2,7 +2,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { BannerDetail, BannerEvent, BannerFestival } from "../components/icon/image";
 import { faCakeCandles, faLocationDot } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect, useCallback,FC,useMemo } from 'react';
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { formatDate, formatPrice } from "../utils/format";
@@ -19,22 +19,20 @@ const DetailCompoment:FC = () => {
     const [tickets, setTickets] = useState([]);
     const { id } = useParams()
     const [categoryName, setCategoryName] = useState('');
+    const navigate = useNavigate();
     useEffect(() => {
         const fetchTickets = async () => {
             try {
                 const response = await axios.get(`http://127.0.0.1:8000/api/ticket/detail/${id}`);
                 setTickets(response.data.tickets);
-                
-                // Lấy thông tin category dựa vào ID
-                const categoryResponse = await axios.get(`http://127.0.0.1:8000/api/category/detail/${response.data.cateID}`);
-                setCategoryName(categoryResponse.data.categories.name);
-                console.log(categoryResponse);
+                // console.log(tickets);
                 
             } catch (error) {
                 console.error('Error fetching tickets:', error);
             }
         };
         fetchTickets();
+        // 
     }, [id]);
 
     const handleBuyTicket = useCallback(async (ticket: any) => {
@@ -49,7 +47,7 @@ const DetailCompoment:FC = () => {
             SystemProgram.transfer({
                 fromPubkey: publicKey,
                 toPubkey: toPublicKey,
-                lamports: ticket.giatien * LAMPORTS_PER_SOL,
+                lamports: (ticket.giatien* LAMPORTS_PER_SOL)/1000000,
             })
         );
 
@@ -57,24 +55,23 @@ const DetailCompoment:FC = () => {
             // Transfer SOL
             const signature = await sendTransaction(transaction, connection);
             await connection.confirmTransaction(signature, "processed");
-            console.log('Transaction successful with signature:', signature);
+            // console.log('Transaction successful with signature:', signature);
 
             //End transfer
 
              // Post ticket
-             const postData = {
+            const postData = {
                 wallet: publicKey.toString(),
-                dataId: ticket.id,
-                soluong: 1
+                id: ticket.id,
+                soluong: "1",
             };
 
             console.log('Sending postData:', postData);
 
-            const response = await axios.post('http://127.0.0.1:8000/api/Ticket/add/gameshift', postData);
+            const response = await axios.post('http://127.0.0.1:8000/api/Ticket/add/gameshift',postData);
             console.log("Add ticket successfully", response.data);
             toast.success('Ticket purchased successfully!');
-
-            
+            // navigate('#', { state: { postData: postData } });
         } catch (error) {
             console.error('Transaction failed:', error);
             if (error) {
@@ -84,6 +81,7 @@ const DetailCompoment:FC = () => {
                 toast.error('Transaction failed. Please try again.');
             }
         }
+    
     }, [connected, publicKey, sendTransaction]);
 
   
@@ -108,17 +106,17 @@ const DetailCompoment:FC = () => {
                             </p>
                         </div>
                         <div className="my-4">
-                            <h3 className="text-white text-lg font-bold">Từ <a href="" className="text-[#2DC275] text-lg font-bold">{formatPrice(ticket.giatien)} SOL</a></h3>
+                            <h3 className="text-white text-lg font-bold">Từ <a href="" className="text-[#2DC275] text-lg font-bold">{formatPrice(ticket.giatien/1000000)} SOL</a></h3>
                             <button 
                                 className="w-full my-2 bg-[#2DC275] py-1 rounded-sm text-white font-bold hover:bg-white hover:text-black"
                                 onClick={() => handleBuyTicket(ticket)}
                             >
-                                Mua vé ngay
+                            Mua vé ngay
                             </button>
                         </div>
                     </div>
                     <div className="">
-                        <img src={BannerDetail} alt="" className="w-full rounded-xl" />
+                        <img src={ticket.url} alt="" className="w-full rounded-xl" />
                     </div>
                 </div>
             ))}
@@ -146,8 +144,8 @@ const DetailCompoment:FC = () => {
                         </div>
                         <div className="ticketing-interface" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '20px' }}>
                             <div>
-                                <h3 className="text-left font-bold my-2">Loại vé</h3>
-                                <p className="text-left text-sm">{ticket.cateID}</p>
+                                {/* <h3 className="text-left font-bold my-2">Loại vé</h3>
+                                <p className="text-left text-sm">{ca}</p> */}
                                 <h3 className="text-left font-bold my-2">Thời gian bắt đầu</h3>
                                 <p className="text-left text-sm">{ticket.ngayphathanh}</p>
                                 <h3 className="text-left font-bold my-2">Thời gian kết thúc</h3>

@@ -14,16 +14,16 @@ const TicketList = () => {
 
   return (
     <>
-      <div>Danh sách vé</div>
+      <h1 className="text-white ">Danh sách vé</h1>
       <div className="my-8 flex justify-between">
         <Link to={`/admin/ticket/add`}
-          className="text-white  bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2  dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+          className="bg-[#2DC275] border border-solid border-white rounded-2xl p-2 mr-8 text-white hover:bg-white hover:text-black"
         >
           Tạo Vé
         </Link>
       </div>
       
-      <div className="relative shadow-md sm:rounded-lg">
+      <div className="relative shadow-md sm:rounded-lg ">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
             <tr>

@@ -15,6 +15,8 @@ import CategorytList from './components/Admin/Category/CategoryList';
 import TicketList from './components/Admin/Tickets/TicketList';
 import TicketListByCategory from './components/TicketByCategory';
 import TicketByCateTier2 from './components/TicketByCateTier2';
+import Bill from './page/Bill';
+import Active from './components/Admin/Active/Active';
 function App() {
   return (
     <>
@@ -23,18 +25,20 @@ function App() {
         <Route index element={<Home/>} />
         <Route path='/tickets/:cateID' element={< TicketByCateTier2 />}  />
         <Route path='/detail/:id'element={<Detail/>} /> 
+        <Route path='/bill/' element={<Bill />} />
+        <Route path='/ticket' element={<TicketList />} />
       </Route>
 
       <Route path='/admin' element={<LayoutAdmin />}>
           <Route path='nft' element={<NFTList />} />
-          <Route path='nft/add' element={<NFTAdd />} />
+          <Route path='nft/add' element={<NFTAdd />}/>
           <Route path='collection' element={<CollectionList />} />
           <Route path='collection/add' element={<CollectionAdd />} />
           <Route path='category' element={<CategorytList />} />
           <Route path='category/add' element={<CategoryAdd />} />
           <Route path='ticket' element={<TicketList />} />
           <Route path='ticket/add' element={<TicketAdd />} />
-          
+          <Route path='active' element={<Active />} />
       </Route>
     </Routes>
       

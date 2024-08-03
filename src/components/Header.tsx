@@ -23,7 +23,7 @@ const Header = () => {
  return (
     <div>
       <div className="header">
-            <div className="bg-[#2DC275] grid grid-cols-3 py-8 px-24">
+            <div className="bg-[#2DC275] grid grid-cols-3 py-8 px-20">
                 <div>
                     <h1 className="text-white text-3xl">
                         <Link to='/'>TICKETBOX</Link>
@@ -36,10 +36,11 @@ const Header = () => {
                     </button>
                 </div>
                 <div className="flex items-center justify-end ">
-                    <button className="border border-solid border-white rounded-2xl p-2 mr-8 text-white hover:bg-white hover:text-black">Create Event</button>
+                    <button className="border border-solid border-white rounded-2xl p-2 mr-8 text-white hover:bg-white hover:text-black">Đăng nhập</button>
+                     <button className="border border-solid border-white rounded-2xl p-2 mr-8 text-white hover:bg-white hover:text-black">Đăng đăng ký</button>
                     <h2 className="cursor-pointer text-white">
                         <FontAwesomeIcon icon={faHourglass} className='text-white mr-1'/>
-                       <Link to="#">My Tickets</Link>
+                       <Link to="/ticket">My Tickets</Link>
                     </h2>
                 </div>
             </div>

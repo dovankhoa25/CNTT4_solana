@@ -19,14 +19,12 @@ const DashBoard = () => {
                 </div>
               <div className="w-full bg-white px-10 py-24">
                 <div className="title-area w-full flex justify-between items-center fixed">
-                  <h1 className="text-[22px] font-bold text-qblack ">
-                    Your Dashboard
-                  </h1>
+                  <Link to="/Admin"><h1 className="text-[22px] font-bold text-qblack ">Your Dashboard</h1></Link> 
                 </div>
                 <div className="profile-wrapper w-full flex space-x-10 mt-[3.5rem]">
                   <div className="w-[236px] min-h-[600px] border-r border-[rgba(0, 0, 0, 0.1)] ">
                     <div className="flex flex-col space-y-10 fixed h-screen overflow-y-auto no-scrollbar">
-                      <div className="item group">
+                      {/* <div className="item group">
                         <Link to="/admin">
                           <div className="flex space-x-3 items-center text-qgray hover:text-red-500">
                             <span>
@@ -37,16 +35,16 @@ const DashBoard = () => {
                             </span>
                           </div>
                         </Link>
-                      </div>
+                      </div> */}
   
                       <div className="item group">
-                        <Link to="nft">
+                        <Link to="Active">
                           <div className="flex space-x-3 items-center text-qgray hover:text-red-500">
                             <span>
                             <FontAwesomeIcon icon={faSliders} />
                             </span>
                             <span className=" font-normal text-base">
-                              NFT
+                              Active
                             </span>
                           </div>
                         </Link>
